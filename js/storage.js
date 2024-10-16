@@ -18,6 +18,7 @@ const Storage =
         text: Values.TextZero,
         site: []
     },
+
     get: async function()
     {
         return await storage.get(this.DefaultValues);
