@@ -1,0 +1,20 @@
+/* help.css */
+body {
+    background-color: #fff;
+    font-size:16px;
+}
+
+main {
+    border: 1px solid #ddd;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 20px;
+    width:40%;
+}
+h1 {
+    color:#0000ad;
+    font-size: 1.75rem;
+    margin: 0 0 12px 0;
+}
+p { margin: 12px 0}
+b { color: #c90000}

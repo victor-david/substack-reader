@@ -1,0 +1,28 @@
+{
+    "manifest_version":3,
+    "version":"1.0",
+    "minimum_chrome_version": "109",
+    "name":"Substack Reader",
+    "description":"Overrides Substack theme colors to display stacks",
+    "author": "Victor David @ Dynamic Creed",
+    "icons":
+    {
+        "16"  : "img/icon.016.png",
+        "32"  : "img/icon.032.png",
+        "48"  : "img/icon.048.png",
+        "96"  : "img/icon.096.png",
+        "128" : "img/icon.128.png"
+    },
+    "action":
+    {
+        "default_popup": "page/popup.html",
+        "default_icon": "img/icon.096.png"
+    },
+    "background":
+    {
+        "service_worker": "js/service.worker.js",
+        "type": "module"
+    },
+    "permissions": ["scripting","storage","management","declarativeContent"],
+    "host_permissions": ["https://*.substack.com/*"]
+}
