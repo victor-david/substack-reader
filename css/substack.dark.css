@@ -1,29 +1,30 @@
 /* substack.dark.css */
 :root {
-    --web_bg_color: #000 !important;
-    --color-primary-themed: #fff !important;
-    --color-secondary-themed: #444 !important;
-    --color-fg-primary: #444 !important;
-    --color-bg-secondary-themed: #fff !important;
-    --print_on_web_bg_color: #444 !important;
     --background_contrast_1: #000 !important;
-    --print_secondary_on_web_bg_color: #444 !important;
-    --color-fg-secondary: #444 !important;
-    --print_secondary: #444 !important;
     --background_contrast_2: #000 !important;
-    --color-detail-themed: #e6e6e6 !important;
-    --color-accent-themed: #9e9e9e !important;
+    --color-accent-themed: #616161 !important;
+    --color-bg-secondary-themed: #000 !important;
+    --color-detail-themed: #191919 !important;
+    --color-fg-primary: #bbb !important;
+    --color-fg-secondary: #bbb !important;
+    --color-primary-themed: #fff !important;
+    --color-secondary-themed: #bbb !important;
+    --cover_bg_color: #000 !important;
+    --cover_print_secondary: #fff !important;
+    --cover_print_tertiary: #fff !important;
+    --print_on_web_bg_color: #bbb !important;
+    --print_secondary: #bbb !important;
+    --print_secondary_on_web_bg_color: #bbb !important;
+    --web_bg_color: #000 !important;
 }
 
 ._pubTheme_ztq6h_1 {
-    --color-fg-primary: #444 !important;
-    --color-bg-secondary: #eee !important;
-
-    --color-button-primary-bg: #ddd !important;
-    --color-button-primary-fg: #000 !important;
-    --color-button-primary-bg-hover: #aaa !important;
-
-    --color-button-secondary-bg: #ddd !important;
-    --color-button-secondary-fg: #000 !important;
-    --color-button-secondary-bg-hover: #aaa !important;
+    --color-bg-secondary: #111 !important;
+    --color-button-primary-bg-hover: #555 !important;
+    --color-button-primary-bg: #222 !important;
+    --color-button-primary-fg: #fff !important;
+    --color-button-secondary-bg-hover: #555 !important;
+    --color-button-secondary-bg: #222 !important;
+    --color-button-secondary-fg: #fff !important;
+    --color-fg-primary: #bbb !important;
 }
