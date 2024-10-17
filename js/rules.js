@@ -11,7 +11,7 @@ const Rules = {
                         pageUrl: { hostSuffix: SiteSuffix },
                     })
                 ],
-                actions: [new chrome.declarativeContent.ShowAction()],
+                actions: [new chrome.declarativeContent.ShowAction(chrome.declarativeContent.ShowAction)],
             };
             sites.forEach(site => {
                 mainRule.conditions.push(new chrome.declarativeContent.PageStateMatcher({

@@ -16,14 +16,17 @@
     "url": "https://github.com/victor-david/substack-reader"
   },
   "bugs": "",
-  "keywords": ["substack", "chrome-extension"],
+  "keywords": [
+    "substack",
+    "chrome-extension"
+  ],
   "author": {
     "name": "Victor David",
     "url": "https://github.com/victor-david/substack-reader"
   },
   "contributors": [],
-  "dependencies": {},
-  "devDependencies": {
-    "@types/chrome": "0.0.278"
-  }
+  "dependencies": {
+    "chrome-types": "^0.1.310"
+  },
+  "devDependencies": {}
 }
