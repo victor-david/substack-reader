@@ -24,3 +24,5 @@ button {
     margin: 2px;
     width:74px;
 }
+.d-block {display: block}
+.d-none {display: none}

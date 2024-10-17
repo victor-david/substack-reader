@@ -5,6 +5,8 @@ import Storage from "./storage.js";
 
 const Option =
 {
+    SubstackDomain: "substack.com",
+
     /**
      * Gets the sites from storage (async)
      *

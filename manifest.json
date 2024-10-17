@@ -23,6 +23,6 @@
         "service_worker": "js/service.worker.js",
         "type": "module"
     },
-    "permissions": ["activeTab","scripting","storage","management","declarativeContent"],
+    "permissions": ["scripting","storage","management","declarativeContent","tabs"],
     "host_permissions": ["https://*.substack.com/*"]
 }
