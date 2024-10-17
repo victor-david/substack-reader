@@ -1,0 +1,29 @@
+{
+  "name": "substack-reader",
+  "version": "1.0.0",
+  "description": "Overrides Substack theme colors to display stacks",
+  "main": "index.js",
+  "type": "module",
+  "license": "MIT",
+  "private": false,
+  "engines": {
+    "node": ">= 14.0.0",
+    "npm": ">= 6.0.0"
+  },
+  "homepage": "https://github.com/victor-david/substack-reader",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/victor-david/substack-reader"
+  },
+  "bugs": "",
+  "keywords": ["substack", "chrome-extension"],
+  "author": {
+    "name": "Victor David",
+    "url": "https://github.com/victor-david/substack-reader"
+  },
+  "contributors": [],
+  "dependencies": {},
+  "devDependencies": {
+    "@types/chrome": "0.0.278"
+  }
+}
