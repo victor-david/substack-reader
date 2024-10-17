@@ -13,10 +13,10 @@ const Updater =
      * This method is called from the service worker to set
      * the status of the extension at startup, installation, and enabled.
      */
-    updateFromStorage: async function()
+    updateFromStorageAsync: async function()
     {
-        const current = await Storage.get();
-        await Private.update(current.text, current.file);
+        const current = await Storage.getAsync();
+        await Private.updateAsync(current.text, current.file);
     },
 
     /**
@@ -28,30 +28,30 @@ const Updater =
      * @param {*} text
      * @param {*} cssFile
      */
-    updateIf: async function(text, cssFile)
+    updateIfAsync: async function(text, cssFile)
     {
-        const current = await Storage.get();
+        const current = await Storage.getAsync();
         if (current.file != cssFile)
         {
-            await Private.update(text, cssFile);
+            await Private.updateAsync(text, cssFile);
         }
     },
 }
 
 const Private =
 {
-    update: async function update(text, cssFile)
+    updateAsync: async function update(text, cssFile)
     {
         await chrome.action.setBadgeText({text: text});
-        await ContentScript.updateCss(cssFile)
+        await ContentScript.updateCssAsync(cssFile)
         .then(async () =>
         {
-            await Storage.setState(text, cssFile);
-            await this.refreshAffectedTabs();
+            await Storage.setStateAsync(text, cssFile);
+            await this.refreshAffectedTabsAsync();
          });
     },
 
-    refreshAffectedTabs: async function ()
+    refreshAffectedTabsAsync: async function ()
     {
         const tabs = await chrome.tabs.query(
             {

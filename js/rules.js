@@ -11,11 +11,11 @@ const Rules =
     /**
      * Sets the declarative content rules
      */
-    setContentRules: async function()
+    setContentRulesAsync: async function()
     {
         chrome.action.disable();
 
-        const sites = await Option.getSites();
+        const sites = await Option.getSitesAsync();
 
         chrome.declarativeContent.onPageChanged.removeRules(undefined, () =>
         {

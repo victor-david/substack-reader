@@ -6,13 +6,13 @@ import Storage from "./storage.js";
 const Option =
 {
     /**
-     * Gets the sites from storage
+     * Gets the sites from storage (async)
      *
      * @returns array
      */
-    getSites: async function()
+    getSitesAsync: async function()
     {
-        const data = await Storage.get();
+        const data = await Storage.getAsync();
         return data.site;
     },
 
@@ -21,16 +21,16 @@ const Option =
      *
      * @param string site
      */
-    addSite: async function(site)
+    addSiteAsync: async function(site)
     {
-        const sites = await this.getSites();
+        const sites = await this.getSitesAsync();
 
         sites.forEach(savedSite =>
         {
             if (savedSite == site) return;
         });
         sites.push(site);
-        await Storage.setSites(sites);
+        await Storage.setSitesAsync(sites);
     },
 
     /**
@@ -38,9 +38,9 @@ const Option =
      *
      * @param string site
      */
-    removeSite: async function(site)
+    removeSiteAsync: async function(site)
     {
-        const sites = await this.getSites();
+        const sites = await this.getSitesAsync();
         sites.forEach(savedSite =>
         {
             if (savedSite == site)

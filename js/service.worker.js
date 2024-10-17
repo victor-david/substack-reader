@@ -1,39 +1,43 @@
-import Content from "./content.js";
+import ContentScript from "./content.js";
 import Updater from "./update.js";
 import Rules from "./rules.js";
-import Storage from "./storage.js";
+import Storage from "./storage.js"
 import Option from "./option.js";
 
 console.log("Service worker started");
+// Storage.getAsync().then((data) => console.log("Service Worker:", data));
+// Option.getSitesAsync().then((sites) => console.log("Service worker", sites));
+
+// const sites = Option.getSites();
+// console.log("Service Worker (sync sites)", sites);
+// console.log("Service Worker (sync all)", Storage.get());
 
 chrome.runtime.onInstalled.addListener(async (e) =>
 {
-    // await Storage.clear();
-    // await Option.addSite("mexicolisto.com");
-    // await Storage.get();
-    await Rules.setContentRules();
-    console.log(await Option.getSites());
+    await ContentScript.registerAsync();
+    await Rules.setContentRulesAsync();
 
     if (e.reason == "install")
     {
-        await Updater.updateFromStorage();
+        await Updater.updateFromStorageAsync();
         await chrome.tabs.create({url:"page/help.html"});
     }
     if (e.reason == "update")
     {
-        await Updater.updateFromStorage();
+        await Updater.updateFromStorageAsync();
     }
 });
 
 chrome.runtime.onStartup.addListener(async () =>
 {
-    await Updater.updateFromStorage();
+    await ContentScript.registerAsync();
+    await Updater.updateFromStorageAsync();
 });
 
 chrome.management.onEnabled.addListener(async ()=>
 {
-    await Updater.updateFromStorage();
-    Rules.setContentRules();
+    await Updater.updateFromStorageAsync();
+    await Rules.setContentRulesAsync();
 });
 
-Content.register();
+// ContentScript.registerAsync();

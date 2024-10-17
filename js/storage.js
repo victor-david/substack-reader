@@ -24,12 +24,12 @@ const Storage =
      *
      * @returns object
      */
-    get: async function()
+    getAsync: async function()
     {
         return await storage.get(this.DefaultValues);
     },
 
-    setState: async function(badgeText, cssFile)
+    setStateAsync: async function(badgeText, cssFile)
     {
         return await storage.set({file:cssFile, text: badgeText});
     },
@@ -39,7 +39,7 @@ const Storage =
      *
      * @param array sites
      */
-    setSites: async function(sites)
+    setSitesAsync: async function(sites)
     {
         if (Array.isArray(sites))
         {
@@ -47,7 +47,7 @@ const Storage =
         }
     },
 
-    clear: async function()
+    clearAsync: async function()
     {
         return await storage.clear();
     }

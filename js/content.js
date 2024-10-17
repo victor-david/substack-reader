@@ -1,26 +1,33 @@
 import {Values} from "./storage.js";
+import Option from "./option.js";
+import Storage from "./storage.js";
 
 const ContentScriptId = "id-content-scripts";
 const DefaultSiteMask = "https://*.substack.com/*";
 
 const ContentScript =
 {
-    register: function()
+    registerAsync: async function()
     {
-        chrome.scripting.registerContentScripts
+        const siteMatches = await Private.getSiteMatchesAsync();
+        console.log("RegisterAsync:", siteMatches);
+
+        await chrome.scripting.registerContentScripts
         (
             [
                 {
                     id: ContentScriptId,
-                    matches: [DefaultSiteMask],
+                    matches: siteMatches,
                     css: [Values.CssZero]
                 }
             ]
         ).catch((err) => console.warn("Registration", err));
     },
 
-    updateCss: async function(cssFile)
+    updateCssAsync: async function(cssFile)
     {
+        console.log("updateCssAsync:", cssFile);
+
         await chrome.scripting.updateContentScripts
         (
             [
@@ -29,16 +36,37 @@ const ContentScript =
                     css: [cssFile]
                 }
             ]
-        )
-        .catch((err) => console.warn("Update registration", err));
-
-
+        ).catch((err) => console.warn("Update content scripts (CSS)", err));
     },
 
-    updateSite: async function()
+    updateSiteMatchesAsync: async function()
     {
+        const siteMatches = await Private.getSiteMatchesAsync();
 
+        await chrome.scripting.updateContentScripts
+        (
+            [
+                {
+                    id: ContentScriptId,
+                    matches: siteMatches,
+                }
+            ]
+        ).catch((err) => console.warn("Update content scripts (Matches)", err));
     }
+};
+
+const Private =
+{
+    getSiteMatchesAsync: async function()
+    {
+        let matches = [DefaultSiteMask];
+        let sites = await Option.getSitesAsync();
+        sites.forEach(site =>
+        {
+            matches.push("https://*." + site + "/*")
+        });
+        return matches;
+    },
 };
 
 export default ContentScript;
