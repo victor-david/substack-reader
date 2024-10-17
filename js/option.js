@@ -1,6 +1,12 @@
 import Storage from "./storage.js";
 const Option = Object.freeze({
+    Schema: "https",
     SubstackDomain: "substack.com",
+    getSiteQueryMask: function (site) {
+        if (!site)
+            site = this.SubstackDomain;
+        return this.Schema + "://*." + site + "/*";
+    },
     getSitesAsync: async function () {
         const data = await Storage.getAsync();
         return data.site;
