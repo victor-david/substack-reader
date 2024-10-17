@@ -19,21 +19,38 @@ const Storage =
         site: []
     },
 
+    /**
+     * Gets the storage object. Returns default values if needed.
+     *
+     * @returns object
+     */
     get: async function()
     {
         return await storage.get(this.DefaultValues);
     },
 
-    set: async function(badgeText, cssFile)
+    setState: async function(badgeText, cssFile)
     {
         return await storage.set({file:cssFile, text: badgeText});
+    },
+
+    /**
+     * Sets sites. Called by Options
+     *
+     * @param array sites
+     */
+    setSites: async function(sites)
+    {
+        if (Array.isArray(sites))
+        {
+            await storage.set({site:sites});
+        }
     },
 
     clear: async function()
     {
         return await storage.clear();
     }
-
 };
 
 export {Values, Storage};

@@ -1,12 +1,18 @@
 import Content from "./content.js";
 import Updater from "./update.js";
 import Rules from "./rules.js";
+import Storage from "./storage.js";
+import Option from "./option.js";
 
 console.log("Service worker started");
 
 chrome.runtime.onInstalled.addListener(async (e) =>
 {
-    Rules.setContentRules();
+    // await Storage.clear();
+    // await Option.addSite("mexicolisto.com");
+    // await Storage.get();
+    await Rules.setContentRules();
+    console.log(await Option.getSites());
 
     if (e.reason == "install")
     {

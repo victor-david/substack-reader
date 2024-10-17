@@ -46,7 +46,7 @@ const Private =
         await ContentScript.updateCss(cssFile)
         .then(async () =>
         {
-            await Storage.set(text, cssFile);
+            await Storage.setState(text, cssFile);
             await this.refreshAffectedTabs();
          });
     },

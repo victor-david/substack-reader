@@ -1,6 +1,7 @@
 // ------------------------------------------------
 // This module deals with declarative content rules
 // ------------------------------------------------
+import Option from "./option.js";
 
 // always included in rules
 const SiteSuffix = ".substack.com";
@@ -10,9 +11,11 @@ const Rules =
     /**
      * Sets the declarative content rules
      */
-    setContentRules: function()
+    setContentRules: async function()
     {
         chrome.action.disable();
+
+        const sites = await Option.getSites();
 
         chrome.declarativeContent.onPageChanged.removeRules(undefined, () =>
         {
@@ -28,29 +31,16 @@ const Rules =
                 actions: [new chrome.declarativeContent.ShowAction()],
             };
 
-            // if(true)
-            // {
-            //     mainRule.conditions.push(
-
-            //         new chrome.declarativeContent.PageStateMatcher(
-            //             {
-            //                 pageUrl: {hostSuffix: ".mexicolisto.com"},
-            //             })
-            //     );
-
-            // }
-
-            // const secRule =
-            // {
-            //     conditions:
-            //     [
-            //         new chrome.declarativeContent.PageStateMatcher(
-            //             {
-            //                 pageUrl: {hostSuffix: ".mexicolisto.com"},
-            //             })
-            //     ],
-            //     actions: [new chrome.declarativeContent.ShowAction()],
-            // };
+            sites.forEach(site =>
+            {
+                mainRule.conditions.push
+                (
+                    new chrome.declarativeContent.PageStateMatcher(
+                        {
+                            pageUrl: {hostSuffix: "." + site},
+                        })
+                );
+            });
 
             // Finally, apply our new array of rules
             const rules = [mainRule];
