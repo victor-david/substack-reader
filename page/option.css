@@ -1,7 +1,1 @@
-body {
-    font-size:14px;
-}
-
-main {
-    margin: 10px;
-}
+@import "common.css";

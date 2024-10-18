@@ -20,7 +20,7 @@ const Util = Object.freeze({
             nodeId = "div-sites";
         const ul = document.createElement("ul");
         const liSubstack = document.createElement("li");
-        liSubstack.appendChild(document.createTextNode(Option.SubstackDomain));
+        liSubstack.appendChild(document.createTextNode(Option.SubstackDomain + " [always]"));
         ul.appendChild(liSubstack);
         const sites = await Option.getSitesAsync();
         sites.forEach(site => {
@@ -28,7 +28,13 @@ const Util = Object.freeze({
             liSite.appendChild(document.createTextNode(site));
             ul.appendChild(liSite);
         });
-        document.getElementById(nodeId)?.appendChild(ul);
+        const node = document.getElementById(nodeId);
+        if (node) {
+            while (node.hasChildNodes()) {
+                node.removeChild(node.firstChild);
+            }
+            document.getElementById(nodeId)?.appendChild(ul);
+        }
     }
 });
 export default Util;

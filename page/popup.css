@@ -1,37 +1,20 @@
 /* popup.css */
+@import "common.css";
 body {
-    padding: 3px;
-    width:300px
+    width:324px
 }
-h2 {
-    color: #00008a;
-    margin: 0;
+.title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
 }
-.title h2 {
+.title b {
+    color:#cd0000;
     font-size: 155%
 }
-.title img {
-    float: left;
-    margin: 0 6px 12px 0;
-}
-.content {
-    clear: both;
-    margin: 16px 8px 4px 8px;
-}
-.option {
-    text-align: right;
-}
-.option img {
-    cursor:hand;
-}
-.clear {clear: both}
 
-button {
-    background: #0095c2;
-    border: 1px solid #989898;
-    color: #fff;
-    margin: 2px;
-    width:74px;
-}
 .d-block {display: block}
 .d-none {display: none}
+#img-option {
+    cursor: hand;
+}

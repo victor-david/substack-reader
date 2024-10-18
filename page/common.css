@@ -1,0 +1,32 @@
+body {
+    background-color: #fff;
+    color:#424242;
+    font-size: 14px;
+    padding: 3px;
+}
+main {
+    margin: 2px 10px;
+}
+h2 {
+    color: #00008a;
+    margin: 0;
+}
+
+li {color: #00008a;}
+
+button {
+    background: #0095c2;
+    border: 1px solid #989898;
+    color: #fff;
+    cursor: hand;
+    height: 24px;
+    margin: 2px;
+    padding: 2px;
+    width:78px;
+}
+
+.content {
+    clear: both;
+    margin: 16px 8px 4px 8px;
+}
+.clear {clear: both}
