@@ -15,5 +15,20 @@ const Util = Object.freeze({
             site = Option.SubstackDomain;
         return Option.Schema + "://*." + site + "/*";
     },
+    displaySites: async function (nodeId) {
+        if (!nodeId)
+            nodeId = "div-sites";
+        const ul = document.createElement("ul");
+        const liSubstack = document.createElement("li");
+        liSubstack.appendChild(document.createTextNode(Option.SubstackDomain));
+        ul.appendChild(liSubstack);
+        const sites = await Option.getSitesAsync();
+        sites.forEach(site => {
+            const liSite = document.createElement("li");
+            liSite.appendChild(document.createTextNode(site));
+            ul.appendChild(liSite);
+        });
+        document.getElementById(nodeId)?.appendChild(ul);
+    }
 });
 export default Util;

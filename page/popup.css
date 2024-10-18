@@ -7,7 +7,10 @@ h2 {
     color: #00008a;
     margin: 0;
 }
-img {
+.title h2 {
+    font-size: 155%
+}
+.title img {
     float: left;
     margin: 0 6px 12px 0;
 }
@@ -15,8 +18,14 @@ img {
     clear: both;
     margin: 16px 8px 4px 8px;
 }
+.option {
+    text-align: right;
+}
+.option img {
+    cursor:hand;
+}
 .clear {clear: both}
-.title {font-size: 155%}
+
 button {
     background: #0095c2;
     border: 1px solid #989898;

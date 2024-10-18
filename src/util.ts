@@ -59,6 +59,32 @@ const Util = Object.freeze(
         return Option.Schema + "://*." + site + "/*"
     },
 
+    /**
+     * Display sites which have access.
+     *
+     * This method may only be called from within the context
+     * of ui facing pieces such as popup and options because
+     * it manipulates the DOM
+     *
+     * @param nodeId The node id in which to place the list of sites (default div-sites)
+     */
+    displaySites: async function(nodeId?:string)
+    {
+        if (!nodeId) nodeId = "div-sites";
+        const ul = document.createElement("ul");
+        const liSubstack = document.createElement("li");
+        liSubstack.appendChild(document.createTextNode(Option.SubstackDomain));
+        ul.appendChild(liSubstack);
+        const sites = await Option.getSitesAsync();
+        sites.forEach(site =>
+        {
+            const liSite = document.createElement("li");
+            liSite.appendChild(document.createTextNode(site));
+            ul.appendChild(liSite);
+        });
+        document.getElementById(nodeId)?.appendChild(ul);
+    }
+
 
 
 });

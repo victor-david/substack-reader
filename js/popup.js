@@ -1,6 +1,5 @@
 import { Values } from "./storage.js";
 import Updater from "./update.js";
-import Option from "./option.js";
 import Util from "./util.js";
 import Tab from "./tab.js";
 document.getElementById("btn-light")?.addEventListener("click", async () => {
@@ -11,6 +10,9 @@ document.getElementById("btn-dark")?.addEventListener("click", async () => {
 });
 document.getElementById("btn-off")?.addEventListener("click", async () => {
     await Updater.updateIfAsync(Values.TextZero, Values.CssZero);
+});
+document.getElementById("img-option")?.addEventListener("click", async () => {
+    await chrome.runtime.openOptionsPage();
 });
 window.addEventListener("load", async () => {
     const tab = await Tab.getCurrentTabAsync();
@@ -26,7 +28,7 @@ const evaluateTab = async function (tab) {
         }
         else {
             if (Util.isExtensionPage(tab.url)) {
-                await handleExtensionPage();
+                await Util.displaySites();
                 show("div-extension");
             }
             else {
@@ -34,19 +36,6 @@ const evaluateTab = async function (tab) {
             }
         }
     }
-};
-const handleExtensionPage = async function () {
-    const ul = document.createElement("ul");
-    const liSubstack = document.createElement("li");
-    liSubstack.appendChild(document.createTextNode(Option.SubstackDomain));
-    ul.appendChild(liSubstack);
-    const sites = await Option.getSitesAsync();
-    sites.forEach(site => {
-        const liSite = document.createElement("li");
-        liSite.appendChild(document.createTextNode(site));
-        ul.appendChild(liSite);
-    });
-    document.getElementById("div-sites")?.appendChild(ul);
 };
 const show = function (elementId) {
     document.getElementById(elementId)?.classList.remove("d-none");

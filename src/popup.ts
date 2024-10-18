@@ -19,6 +19,11 @@ document.getElementById("btn-off")?.addEventListener("click", async () =>
     await Updater.updateIfAsync(Values.TextZero, Values.CssZero);
 });
 
+document.getElementById("img-option")?.addEventListener("click", async () =>
+{
+    await chrome.runtime.openOptionsPage();
+});
+
 // load
 // DOMContentLoaded
 window.addEventListener("load", async () =>
@@ -45,7 +50,7 @@ const evaluateTab = async function(tab: chrome.tabs.Tab): Promise<void>
         {
             if (Util.isExtensionPage(tab.url))
             {
-                await handleExtensionPage();
+                await Util.displaySites();
                 show("div-extension");
             }
             else
@@ -54,22 +59,6 @@ const evaluateTab = async function(tab: chrome.tabs.Tab): Promise<void>
             }
         }
     }
-}
-
-const handleExtensionPage = async function()
-{
-    const ul = document.createElement("ul");
-    const liSubstack = document.createElement("li");
-    liSubstack.appendChild(document.createTextNode(Option.SubstackDomain));
-    ul.appendChild(liSubstack);
-    const sites = await Option.getSitesAsync();
-    sites.forEach(site =>
-    {
-        const liSite = document.createElement("li");
-        liSite.appendChild(document.createTextNode(site));
-        ul.appendChild(liSite);
-    });
-    document.getElementById("div-sites")?.appendChild(ul);
 }
 
 const show = function(elementId: string)
