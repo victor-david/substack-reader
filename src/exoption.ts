@@ -13,5 +13,4 @@ document.getElementById("btn-clear")?.addEventListener("click", async () =>
 {
     await Option.clearAllSitesAync();
     await Util.displaySites();
-
 });

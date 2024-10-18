@@ -3,35 +3,38 @@
         <link rel="stylesheet" href="popup.css" type="text/css" media="screen"/>
     </head>
     <body>
-        <div class="title">
-            <div>
-                <img src="/img/icon.032.png"/>
-            </div>
-            <div>
-                <b>Substack Reader</b>
-            </div>
-            <div>
-                <img id="img-option" src="/img/option.024.png"/>
-            </div>
-        </div>
-        <div>
-            Overrides Substack theme colors to display stacks
-        </div>
-        <div id="div-theme-buttons" class="content d-none">
-            <button id="btn-light">Light</button>
-            <button id="btn-dark">Dark</button>
-            <button id="btn-off">Off</button>
-        </div>
-        <div id="div-substack" class="content d-none">
-            Extension is always enabled on this site
-        </div>
-        <div id="div-na" class="content d-none">
-            Extension is not applicable to this page.
-        </div>
-        <div id="div-extension" class="content d-none">
-            <div>Sites with access</div>
-            <div id="div-sites"></div>
-        </div>
+        <main>
+            <section class="header">
+                <div>
+                    <img src="/img/icon.032.png"/>
+                </div>
+                <h2>Substack Reader</h2>
+                <div>
+                    <img id="img-option" src="/img/option.024.png"/>
+                </div>
+            </section>
+            <section class="content">
+                <div>
+                    Overrides Substack theme colors
+                </div>
+
+                <div id="div-theme-buttons" class="d-none">
+                    <button id="btn-light">Light</button>
+                    <button id="btn-dark">Dark</button>
+                    <button id="btn-off">Off</button>
+                </div>
+                <div id="div-substack" class="d-none">
+                    Extension is always enabled on this site
+                </div>
+                <div id="div-na" class="d-none">
+                    Extension is not applicable to this page.
+                </div>
+                <div id="div-extension" class="d-none">
+                    <div>Sites with access</div>
+                    <div id="div-sites"></div>
+                </div>
+            </section>
+        </main>
     </body>
     <script src="../js/popup.js" type="module"></script>
 </html>

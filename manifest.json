@@ -26,7 +26,7 @@
     "options_ui":
     {
         "page": "page/option.html",
-        "open_in_tab": false
+        "open_in_tab": true
     },
     "permissions": ["scripting","storage","management","declarativeContent","tabs"],
     "host_permissions": ["https://*.substack.com/*"]

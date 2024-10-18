@@ -1,20 +1,8 @@
 /* popup.css */
 @import "common.css";
-body {
-    width:324px
-}
-.title {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-}
-.title b {
-    color:#cd0000;
-    font-size: 155%
-}
+
+body {width:334px}
 
 .d-block {display: block}
 .d-none {display: none}
-#img-option {
-    cursor: hand;
-}
+#img-option {cursor: hand}
