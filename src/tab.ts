@@ -2,6 +2,8 @@
  * This module handles tab operations
  */
 import Option from "./option.js";
+import Util from "./util.js";
+
 
 const Tab = Object.freeze(
 {
@@ -23,12 +25,12 @@ const Tab = Object.freeze(
      */
     reloadTabsAsync: async function (): Promise<void>
     {
-        const urls = [Option.getSiteQueryMask()];
+        const urls = [Util.getSiteQueryMask()];
         const sites = await Option.getSitesAsync();
 
         sites.forEach(site =>
         {
-            urls.push(Option.getSiteQueryMask(site));
+            urls.push(Util.getSiteQueryMask(site));
         });
 
         const tabs = await chrome.tabs.query({url: urls});

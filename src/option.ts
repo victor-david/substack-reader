@@ -16,20 +16,6 @@ const Option = Object.freeze(
     SubstackDomain: "substack.com",
 
     /**
-     * Gets a site mask for the specified site
-     *
-     * Omit site parameter to return the site mask for substack.com
-     *
-     * @param site
-     * @returns string
-     */
-    getSiteQueryMask: function(site?: string): string
-    {
-        if (!site) site = this.SubstackDomain;
-        return this.Schema + "://*." + site + "/*"
-    },
-
-    /**
      * Gets the sites from storage (async)
      *
      * @returns array

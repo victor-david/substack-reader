@@ -1,4 +1,5 @@
 import Option from "./option.js";
+import Util from "./util.js";
 const Tab = Object.freeze({
     getCurrentTabAsync: async function () {
         const options = { active: true, lastFocusedWindow: true };
@@ -6,10 +7,10 @@ const Tab = Object.freeze({
         return tab;
     },
     reloadTabsAsync: async function () {
-        const urls = [Option.getSiteQueryMask()];
+        const urls = [Util.getSiteQueryMask()];
         const sites = await Option.getSitesAsync();
         sites.forEach(site => {
-            urls.push(Option.getSiteQueryMask(site));
+            urls.push(Util.getSiteQueryMask(site));
         });
         const tabs = await chrome.tabs.query({ url: urls });
         tabs.forEach(tab => {
