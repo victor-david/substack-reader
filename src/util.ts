@@ -42,21 +42,33 @@ const Util = Object.freeze(
      */
     isSubstack: function(url: string): boolean
     {
-        return url.includes(Option.SubstackDomain);
+        return url.includes(Option.SubstackHost);
     },
 
     /**
-     * Gets a site mask for the specified site
+     * Gets the host name from the specified url
      *
-     * Omit site parameter to return the site mask for substack.com
-     *
-     * @param site
+     * @param url
      * @returns string
      */
-    getSiteQueryMask: function(site?: string): string
+    getHostName: function(url: string): string
     {
-        if (!site) site = Option.SubstackDomain;
-        return Option.Schema + "://*." + site + "/*"
+        const obj = new URL(url);
+        return obj.hostname;
+    },
+
+    /**
+     * Gets a host mask for the specified site
+     *
+     * Omit host parameter to return the host mask for the default host, substack.com
+     *
+     * @param host
+     * @returns string
+     */
+    getHostQueryMask: function(host?: string): string
+    {
+        if (!host) host = Option.SubstackHost;
+        return Option.Schema + "://*." + host + "/*"
     },
 
     /**
@@ -68,14 +80,14 @@ const Util = Object.freeze(
      *
      * @param nodeId The node id in which to place the list of sites (default div-sites)
      */
-    displaySites: async function(nodeId?:string)
+    displayHosts: async function(nodeId?:string)
     {
         if (!nodeId) nodeId = "div-sites";
         const ul = document.createElement("ul");
         const liSubstack = document.createElement("li");
-        liSubstack.appendChild(document.createTextNode(Option.SubstackDomain + " [always]"));
+        liSubstack.appendChild(document.createTextNode(Option.SubstackHost + " [always]"));
         ul.appendChild(liSubstack);
-        const sites = await Option.getSitesAsync();
+        const sites = await Option.getHostsAsync();
         sites.forEach(site =>
         {
             const liSite = document.createElement("li");

@@ -16,7 +16,7 @@ const Storage =
     {
         file: Values.CssZero,
         text: Values.TextZero,
-        site: []
+        host: []
     },
 
     /**
@@ -39,11 +39,11 @@ const Storage =
      *
      * @param array sites
      */
-    setSitesAsync: async function(sites: Array<string>)
+    setHostsAsync: async function(hosts: Array<string>)
     {
-        if (Array.isArray(sites))
+        if (Array.isArray(hosts))
         {
-            await storage.set({site:sites});
+            await storage.set({host:hosts});
         }
     },
 

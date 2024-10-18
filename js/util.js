@@ -8,21 +8,25 @@ const Util = Object.freeze({
         return url.startsWith(this.ExtensionPage);
     },
     isSubstack: function (url) {
-        return url.includes(Option.SubstackDomain);
+        return url.includes(Option.SubstackHost);
     },
-    getSiteQueryMask: function (site) {
-        if (!site)
-            site = Option.SubstackDomain;
-        return Option.Schema + "://*." + site + "/*";
+    getHostName: function (url) {
+        const obj = new URL(url);
+        return obj.hostname;
     },
-    displaySites: async function (nodeId) {
+    getHostQueryMask: function (host) {
+        if (!host)
+            host = Option.SubstackHost;
+        return Option.Schema + "://*." + host + "/*";
+    },
+    displayHosts: async function (nodeId) {
         if (!nodeId)
             nodeId = "div-sites";
         const ul = document.createElement("ul");
         const liSubstack = document.createElement("li");
-        liSubstack.appendChild(document.createTextNode(Option.SubstackDomain + " [always]"));
+        liSubstack.appendChild(document.createTextNode(Option.SubstackHost + " [always]"));
         ul.appendChild(liSubstack);
-        const sites = await Option.getSitesAsync();
+        const sites = await Option.getHostsAsync();
         sites.forEach(site => {
             const liSite = document.createElement("li");
             liSite.appendChild(document.createTextNode(site));

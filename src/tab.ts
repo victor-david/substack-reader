@@ -25,12 +25,12 @@ const Tab = Object.freeze(
      */
     reloadTabsAsync: async function (): Promise<void>
     {
-        const urls = [Util.getSiteQueryMask()];
-        const sites = await Option.getSitesAsync();
+        const urls = [Util.getHostQueryMask()];
+        const sites = await Option.getHostsAsync();
 
         sites.forEach(site =>
         {
-            urls.push(Util.getSiteQueryMask(site));
+            urls.push(Util.getHostQueryMask(site));
         });
 
         const tabs = await chrome.tabs.query({url: urls});

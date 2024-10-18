@@ -1,32 +1,32 @@
 import Storage from "./storage.js";
 const Option = Object.freeze({
     Schema: "https",
-    SubstackDomain: "substack.com",
-    getSitesAsync: async function () {
+    SubstackHost: "substack.com",
+    getHostsAsync: async function () {
         const data = await Storage.getAsync();
-        return data.site;
+        return data.host;
     },
-    addSiteAsync: async function (site) {
-        const sites = await this.getSitesAsync();
-        let haveSite = false;
-        sites.forEach((savedSite) => {
-            if (savedSite == site)
-                haveSite = true;
+    addHostAsync: async function (host) {
+        const hosts = await this.getHostsAsync();
+        let haveHost = false;
+        hosts.forEach((savedHost) => {
+            if (savedHost == host)
+                haveHost = true;
         });
-        if (!haveSite) {
-            sites.push(site);
-            await Storage.setSitesAsync(sites);
+        if (!haveHost) {
+            hosts.push(host);
+            await Storage.setHostsAsync(hosts);
         }
     },
-    removeSiteAsync: async function (site) {
-        const sites = await this.getSitesAsync();
-        sites.forEach((savedSite) => {
-            if (savedSite == site) {
+    removeHostAsync: async function (host) {
+        const hosts = await this.getHostsAsync();
+        hosts.forEach((savedHost) => {
+            if (savedHost == host) {
             }
         });
     },
-    clearAllSitesAync: async function () {
-        await Storage.setSitesAsync([]);
+    clearAllHostsAync: async function () {
+        await Storage.setHostsAsync([]);
     }
 });
 export default Option;

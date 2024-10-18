@@ -42,12 +42,17 @@ const evaluateTab = async function(tab: chrome.tabs.Tab): Promise<void>
                 show("div-theme-buttons");
                 show("div-substack");
             }
+            else
+            {
+                const host = Util.getHostName(tab.url);
+
+            }
         }
         else
         {
             if (Util.isExtensionPage(tab.url))
             {
-                await Util.displaySites();
+                await Util.displayHosts();
                 show("div-extension");
             }
             else

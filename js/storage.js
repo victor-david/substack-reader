@@ -11,7 +11,7 @@ const Storage = {
     DefaultValues: {
         file: Values.CssZero,
         text: Values.TextZero,
-        site: []
+        host: []
     },
     getAsync: async function () {
         return await storage.get(this.DefaultValues);
@@ -19,9 +19,9 @@ const Storage = {
     setStateAsync: async function (badgeText, cssFile) {
         return await storage.set({ file: cssFile, text: badgeText });
     },
-    setSitesAsync: async function (sites) {
-        if (Array.isArray(sites)) {
-            await storage.set({ site: sites });
+    setHostsAsync: async function (hosts) {
+        if (Array.isArray(hosts)) {
+            await storage.set({ host: hosts });
         }
     },
     clearAsync: async function () {

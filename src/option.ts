@@ -11,61 +11,61 @@ const Option = Object.freeze(
     Schema: "https",
 
     /**
-     * The substack domain
+     * The substack host
      */
-    SubstackDomain: "substack.com",
+    SubstackHost: "substack.com",
 
     /**
-     * Gets the sites from storage (async)
+     * Gets the hosts from storage (async)
      *
      * @returns array
      */
-    getSitesAsync: async function(): Promise<string[]>
+    getHostsAsync: async function(): Promise<string[]>
     {
         const data = await Storage.getAsync();
-        return data.site;
+        return data.host;
     },
 
     /**
-     * Adds a site to storage if it doesn't already exist.
+     * Adds a host to storage if it doesn't already exist.
      *
-     * @param site
+     * @param host
      */
-    addSiteAsync: async function(site: string)
+    addHostAsync: async function(host: string)
     {
-        const sites = await this.getSitesAsync();
-        let haveSite = false;
+        const hosts = await this.getHostsAsync();
+        let haveHost = false;
 
-        sites.forEach((savedSite: string) =>
+        hosts.forEach((savedHost: string) =>
         {
-            if (savedSite == site) haveSite = true;
+            if (savedHost == host) haveHost = true;
         });
-        if (!haveSite)
+        if (!haveHost)
         {
-            sites.push(site);
-            await Storage.setSitesAsync(sites);
+            hosts.push(host);
+            await Storage.setHostsAsync(hosts);
         }
     },
 
     /**
-     * Removes a site from storage if it exists
+     * Removes a host from storage if it exists
      *
-     * @param site
+     * @param host
      */
-    removeSiteAsync: async function(site: string)
+    removeHostAsync: async function(host: string)
     {
-        const sites = await this.getSitesAsync();
-        sites.forEach((savedSite:string) =>
+        const hosts = await this.getHostsAsync();
+        hosts.forEach((savedHost:string) =>
         {
-            if (savedSite == site)
+            if (savedHost == host)
             {
 
             }
         });
     },
-    clearAllSitesAync: async function()
+    clearAllHostsAync: async function()
     {
-        await Storage.setSitesAsync([]);
+        await Storage.setHostsAsync([]);
     }
 });
 export default Option;

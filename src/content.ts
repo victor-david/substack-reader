@@ -1,21 +1,21 @@
 import {Values} from "./storage.js";
 import Option from "./option.js";
+import Util from "./util.js";
 
 const ContentScriptId = "id-content-scripts";
-const DefaultSiteMask = "https://*.substack.com/*";
 
 const ContentScript =
 {
     registerAsync: async function()
     {
-        const siteMatches = await Private.getSiteMatchesAsync();
+        const hostMatches = await Private.getHostMatchesAsync();
 
         await chrome.scripting.registerContentScripts
         (
             [
                 {
                     id: ContentScriptId,
-                    matches: siteMatches,
+                    matches: hostMatches,
                     css: [Values.CssZero]
                 }
             ]
@@ -35,16 +35,16 @@ const ContentScript =
         ).catch((err) => console.warn("Update content scripts (CSS)", err));
     },
 
-    updateSiteMatchesAsync: async function()
+    updateHostMatchesAsync: async function()
     {
-        const siteMatches = await Private.getSiteMatchesAsync();
+        const hostMatches = await Private.getHostMatchesAsync();
 
         await chrome.scripting.updateContentScripts
         (
             [
                 {
                     id: ContentScriptId,
-                    matches: siteMatches,
+                    matches: hostMatches,
                 }
             ]
         ).catch((err) => console.warn("Update content scripts (Matches)", err));
@@ -53,13 +53,13 @@ const ContentScript =
 
 const Private =
 {
-    getSiteMatchesAsync: async function()
+    getHostMatchesAsync: async function()
     {
-        let matches = [DefaultSiteMask];
-        let sites = await Option.getSitesAsync();
-        sites.forEach(site =>
+        let matches = [Util.getHostQueryMask()];
+        let hosts = await Option.getHostsAsync();
+        hosts.forEach(host =>
         {
-            matches.push("https://*." + site + "/*")
+            matches.push(Util.getHostQueryMask(host));
         });
         return matches;
     },

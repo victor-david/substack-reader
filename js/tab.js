@@ -7,10 +7,10 @@ const Tab = Object.freeze({
         return tab;
     },
     reloadTabsAsync: async function () {
-        const urls = [Util.getSiteQueryMask()];
-        const sites = await Option.getSitesAsync();
+        const urls = [Util.getHostQueryMask()];
+        const sites = await Option.getHostsAsync();
         sites.forEach(site => {
-            urls.push(Util.getSiteQueryMask(site));
+            urls.push(Util.getHostQueryMask(site));
         });
         const tabs = await chrome.tabs.query({ url: urls });
         tabs.forEach(tab => {
