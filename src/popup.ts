@@ -1,6 +1,5 @@
 import {Values} from "./storage.js"
 import Updater from "./update.js"
-import Option from "./option.js";
 import Util from "./util.js";
 import Tab from "./tab.js";
 
@@ -24,8 +23,6 @@ document.getElementById("img-option")?.addEventListener("click", async () =>
     await chrome.runtime.openOptionsPage();
 });
 
-// load
-// DOMContentLoaded
 window.addEventListener("load", async () =>
 {
     const tab = await Tab.getCurrentTabAsync();
