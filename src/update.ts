@@ -26,8 +26,8 @@ const Updater =
      * This method is called from the button click handlers in popup.js
      * using fixed values for the parms; they won't be empty.
      *
-     * @param {*} text
-     * @param {*} cssFile
+     * @param {string} text
+     * @param {string} cssFile
      */
     updateIfAsync: async function(text: string, cssFile: string)
     {

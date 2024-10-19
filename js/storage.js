@@ -25,7 +25,7 @@ const Storage = {
         }
     },
     clearAsync: async function () {
-        return await storage.clear();
+        await storage.clear();
     }
 };
 export { Values, Storage };

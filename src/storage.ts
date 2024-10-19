@@ -22,24 +22,24 @@ const Storage =
     /**
      * Gets the storage object. Returns default values if needed.
      *
-     * @returns object
+     * @returns
      */
     getAsync: async function()
     {
         return await storage.get(this.DefaultValues);
     },
 
-    setStateAsync: async function(badgeText: string, cssFile: string)
+    setStateAsync: async function(badgeText: string, cssFile: string): Promise<void>
     {
         return await storage.set({file:cssFile, text: badgeText});
     },
 
     /**
-     * Sets sites. Called by Options
+     * Sets hosts. Called by Options
      *
-     * @param array sites
+     * @param {array<string>} hosts
      */
-    setHostsAsync: async function(hosts: Array<string>)
+    setHostsAsync: async function(hosts: Array<string>): Promise<void>
     {
         if (Array.isArray(hosts))
         {
@@ -47,9 +47,12 @@ const Storage =
         }
     },
 
-    clearAsync: async function()
+    /**
+     * Clears all storage
+     */
+    clearAsync: async function(): Promise<void>
     {
-        return await storage.clear();
+        await storage.clear();
     }
 };
 
