@@ -4,7 +4,7 @@ import Util from "./util.js";
 
 const ContentScriptId = "id-content-scripts";
 
-const ContentScript =
+const ContentScript = Object.freeze(
 {
     /**
      * Registers the content scripts
@@ -62,7 +62,7 @@ const ContentScript =
             ]
         ).catch((err) => console.warn("Update content scripts (Matches)", err));
     }
-};
+});
 
 const Private =
 {

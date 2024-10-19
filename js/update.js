@@ -1,7 +1,7 @@
 import Storage from "./storage.js";
 import ContentScript from "./content.js";
 import Tab from "./tab.js";
-const Updater = {
+const Updater = Object.freeze({
     updateFromStorageAsync: async function () {
         const current = await Storage.getAsync();
         await Private.updateAsync(current.text, current.file);
@@ -12,7 +12,7 @@ const Updater = {
             await Private.updateAsync(text, cssFile);
         }
     },
-};
+});
 const Private = {
     updateAsync: async function update(text, cssFile) {
         await chrome.action.setBadgeText({ text: text });

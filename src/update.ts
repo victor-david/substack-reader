@@ -6,7 +6,7 @@ import Tab from "./tab.js";
  * Provides an entry point to update content scripts.
  * Used by service worker and popup
  */
-const Updater =
+const Updater = Object.freeze(
 {
     /**
      * Updates using stored values.
@@ -37,7 +37,7 @@ const Updater =
             await Private.updateAsync(text, cssFile);
         }
     },
-}
+});
 
 const Private =
 {

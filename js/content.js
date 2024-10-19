@@ -2,7 +2,7 @@ import { Values } from "./storage.js";
 import Option from "./option.js";
 import Util from "./util.js";
 const ContentScriptId = "id-content-scripts";
-const ContentScript = {
+const ContentScript = Object.freeze({
     registerAsync: async function () {
         const hostMatches = await Private.getHostMatchesAsync();
         await chrome.scripting.registerContentScripts([
@@ -30,7 +30,7 @@ const ContentScript = {
             }
         ]).catch((err) => console.warn("Update content scripts (Matches)", err));
     }
-};
+});
 const Private = {
     getHostMatchesAsync: async function () {
         let matches = [Util.getHostQueryMask()];
