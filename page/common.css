@@ -7,6 +7,13 @@ body {
 main {
     margin: 2px 10px;
 }
+
+h1 {
+    color:#0000ad;
+    font-size: 1.75rem;
+    margin: 0 0 12px 0;
+}
+
 h2,h3 {
     color: #00008a;
     margin: 0;
@@ -36,7 +43,7 @@ button {
 
 .header h2 {
     color:#cd0000;
-    font-size: 140%
+    font-size: 148%
 }
 
 section.content div {
