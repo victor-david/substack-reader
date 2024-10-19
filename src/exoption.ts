@@ -9,6 +9,11 @@ window.addEventListener("load", async () =>
     await Util.displayHosts();
 });
 
+document.getElementById("btn-refresh")?.addEventListener("click", async () =>
+{
+    await Util.displayHosts();
+});
+
 document.getElementById("btn-clear")?.addEventListener("click", async () =>
 {
     await Option.clearAllHostsAync();
