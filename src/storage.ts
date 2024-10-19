@@ -1,6 +1,6 @@
 const storage = chrome.storage.local;
 
-const Values =
+const Values = Object.freeze(
 {
     CssZero     : "css/substack.zero.css",
     CssLight    : "css/substack.light.css",
@@ -8,25 +8,40 @@ const Values =
     TextZero    : "Off",
     TextLight   : "Light",
     TextDark    : "Dark"
-};
+});
 
-const Storage =
+const DefaultValues = Object.freeze(
 {
-    DefaultValues:
-    {
-        file: Values.CssZero,
-        text: Values.TextZero,
-        host: []
-    },
+    file: Values.CssZero,
+    text: Values.TextZero,
+    host: []
+});
 
+class StorageObject
+{
+    file = DefaultValues.file;
+    text = DefaultValues.text;
+    host = DefaultValues.host;
+
+    constructor(raw: any)
+    {
+        this.file = raw.file;
+        this.text = raw.text;
+        this.host = raw.host;
+    }
+}
+
+const Storage = Object.freeze(
+{
     /**
      * Gets the storage object. Returns default values if needed.
      *
-     * @returns
+     * @returns {Promise<StorageObject>}
      */
-    getAsync: async function()
+    getAsync: async function(): Promise<StorageObject>
     {
-        return await storage.get(this.DefaultValues);
+        const raw = await storage.get(DefaultValues);
+        return new StorageObject(raw);
     },
 
     setStateAsync: async function(badgeText: string, cssFile: string): Promise<void>
@@ -54,7 +69,7 @@ const Storage =
     {
         await storage.clear();
     }
-};
+});
 
 export {Values, Storage};
 export default Storage;
