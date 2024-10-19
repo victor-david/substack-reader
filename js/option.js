@@ -1,3 +1,4 @@
+import ContentScript from "./content.js";
 import Storage from "./storage.js";
 const Option = Object.freeze({
     Schema: "https",
@@ -25,6 +26,7 @@ const Option = Object.freeze({
         if (!haveHost) {
             hosts.push(host);
             await Storage.setHostsAsync(hosts);
+            await ContentScript.updateHostMatchesAsync();
         }
     },
     removeHostAsync: async function (host) {
@@ -38,10 +40,12 @@ const Option = Object.freeze({
         if (hostIndex > -1) {
             hosts.splice(hostIndex, 1);
             await Storage.setHostsAsync(hosts);
+            await ContentScript.updateHostMatchesAsync();
         }
     },
     clearAllHostsAync: async function () {
         await Storage.setHostsAsync([]);
+        await ContentScript.updateHostMatchesAsync();
     }
 });
 export default Option;

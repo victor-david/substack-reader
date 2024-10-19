@@ -1,6 +1,7 @@
 /**
  * This module handles extension options
  */
+import ContentScript from "./content.js";
 import Storage from "./storage.js";
 
 const Option = Object.freeze(
@@ -63,6 +64,7 @@ const Option = Object.freeze(
         {
             hosts.push(host);
             await Storage.setHostsAsync(hosts);
+            await ContentScript.updateHostMatchesAsync();
         }
     },
 
@@ -87,11 +89,13 @@ const Option = Object.freeze(
         {
             hosts.splice(hostIndex, 1);
             await Storage.setHostsAsync(hosts);
+            await ContentScript.updateHostMatchesAsync();
         }
     },
     clearAllHostsAync: async function()
     {
         await Storage.setHostsAsync([]);
+        await ContentScript.updateHostMatchesAsync();
     }
 });
 export default Option;

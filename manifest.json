@@ -29,5 +29,5 @@
         "open_in_tab": true
     },
     "permissions": ["scripting","storage","management","declarativeContent","tabs"],
-    "host_permissions": ["https://*.substack.com/*"]
+    "host_permissions": ["https://*/*"]
 }
