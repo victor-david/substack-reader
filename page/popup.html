@@ -3,18 +3,54 @@
         <link rel="stylesheet" href="popup.css" type="text/css" media="screen"/>
     </head>
     <body>
-        <div>
-            <img src="/img/icon.048.png"/>
-            <h2 class="title">Substack Reader</h2>
-        </div>
-        <div>
-            Overrides Substack theme colors to display stacks
-        </div>
-        <div class="content">
-            <button id="btn-light">Light</button>
-            <button id="btn-dark">Dark</button>
-            <button id="btn-off">Off</button>
-        </div>
+        <main>
+            <section class="header">
+                <div>
+                    <img src="/img/icon.032.png"/>
+                </div>
+                <h2>Substack Reader</h2>
+                <div>
+                    <img id="img-option" src="/img/option.024.png"/>
+                </div>
+            </section>
+            <section class="content">
+                <div>
+                    Overrides Substack theme colors
+                </div>
+
+                <div id="div-theme-buttons" class="d-none">
+                    <button id="btn-light">Light</button>
+                    <button id="btn-dark">Dark</button>
+                    <button id="btn-off">Off</button>
+                </div>
+                <div id="div-substack" class="d-none">
+                    Extension is always enabled on this site
+                </div>
+                <section id="section-user-enabled" class="d-none">
+                    <div>
+                        Extension is enabled on this site (user)
+                    </div>
+                    <div>
+                        <button id="btn-remove-host" class="btn-full">Revoke access</button>
+                    </div>
+                </section>
+                <section id="section-user-add" class="content d-none">
+                    <div>
+                        Extension is not enabled on this site
+                    </div>
+                    <div>
+                        <button id="btn-add-host" class="btn-full">Include this site</button>
+                    </div>
+                </section>
+                <div id="div-na" class="d-none">
+                    Extension is not applicable to this page.
+                </div>
+                <div id="div-extension" class="d-none">
+                    <div>Hosts with access</div>
+                    <div id="div-sites"></div>
+                </div>
+            </section>
+        </main>
     </body>
-    <script src="popup.js" type="module"></script>
+    <script src="../js/popup.js" type="module"></script>
 </html>

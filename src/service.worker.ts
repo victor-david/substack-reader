@@ -1,20 +1,30 @@
 import ContentScript from "./content.js";
 import Updater from "./update.js";
+
 console.log("Service worker started");
-chrome.runtime.onInstalled.addListener(async (e) => {
+
+chrome.runtime.onInstalled.addListener(async (e) =>
+{
     await ContentScript.registerAsync();
-    if (e.reason == "install") {
+
+    if (e.reason == "install")
+    {
         await Updater.updateFromStorageAsync();
-        await chrome.tabs.create({ url: "page/help.html" });
+        await chrome.tabs.create({url:"page/help.html"});
     }
-    if (e.reason == "update") {
+    if (e.reason == "update")
+    {
         await Updater.updateFromStorageAsync();
     }
 });
-chrome.runtime.onStartup.addListener(async () => {
+
+chrome.runtime.onStartup.addListener(async () =>
+{
     await ContentScript.registerAsync();
     await Updater.updateFromStorageAsync();
 });
-chrome.management.onEnabled.addListener(async () => {
+
+chrome.management.onEnabled.addListener(async ()=>
+{
     await Updater.updateFromStorageAsync();
 });

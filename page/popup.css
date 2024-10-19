@@ -1,26 +1,9 @@
 /* popup.css */
-body {
-    padding: 3px;
-    width:300px
-}
-h2 {
-    color: #00008a;
-    margin: 0;
-}
-img {
-    float: left;
-    margin: 0 6px 12px 0;
-}
-.content {
-    clear: both;
-    margin: 16px 8px 4px 8px;
-}
-.clear {clear: both}
-.title {font-size: 155%}
-button {
-    background: #0095c2;
-    border: 1px solid #989898;
-    color: #fff;
-    margin: 2px;
-    width:74px;
-}
+@import "common.css";
+
+body {width:334px}
+button.btn-full {display: block; margin: 0; width: 100%}
+
+.d-block {display: block}
+.d-none {display: none}
+#img-option {cursor: hand}
