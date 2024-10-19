@@ -4,7 +4,6 @@
 import Option from "./option.js";
 import Util from "./util.js";
 
-
 const Tab = Object.freeze(
 {
     /**
@@ -17,6 +16,29 @@ const Tab = Object.freeze(
         const options = { active: true, lastFocusedWindow: true };
         const [tab] = await chrome.tabs.query(options);
         return tab;
+    },
+
+    /**
+     * Gets the url from the tab, either its url or pending, or empty string
+     *
+     * @param tab
+     *
+     * @returns string
+     */
+    getTabUrl: function(tab?: chrome.tabs.Tab): string
+    {
+        if (tab)
+        {
+            if (tab.url?.length)
+            {
+                return tab.url;
+            }
+            if (tab.pendingUrl?.length)
+            {
+                return tab.pendingUrl;
+            }
+        }
+        return "";
     },
 
     /**

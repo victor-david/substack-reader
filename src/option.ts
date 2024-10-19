@@ -27,19 +27,38 @@ const Option = Object.freeze(
     },
 
     /**
+     * Gets a boolean value that indicates if the specified hosts exists in storage
+     *
+     * @param host
+     * @returns boolean
+     */
+    haveHost: async function(host: string): Promise<boolean>
+    {
+        let haveHost = false;
+        const hosts = await this.getHostsAsync();
+
+        hosts.forEach((savedHost: string) =>
+        {
+            if (savedHost == host) haveHost = true;
+        });
+        return haveHost;
+    },
+
+    /**
      * Adds a host to storage if it doesn't already exist.
      *
      * @param host
      */
     addHostAsync: async function(host: string)
     {
-        const hosts = await this.getHostsAsync();
         let haveHost = false;
+        const hosts = await this.getHostsAsync();
 
         hosts.forEach((savedHost: string) =>
         {
             if (savedHost == host) haveHost = true;
         });
+
         if (!haveHost)
         {
             hosts.push(host);
@@ -55,13 +74,20 @@ const Option = Object.freeze(
     removeHostAsync: async function(host: string)
     {
         const hosts = await this.getHostsAsync();
-        hosts.forEach((savedHost:string) =>
+        let hostIndex = -1;
+        hosts.forEach((savedHost:string, index: number) =>
         {
             if (savedHost == host)
             {
-
+                hostIndex = index;
             }
         });
+
+        if (hostIndex > -1)
+        {
+            hosts.splice(hostIndex, 1);
+            await Storage.setHostsAsync(hosts);
+        }
     },
     clearAllHostsAync: async function()
     {

@@ -6,9 +6,18 @@ const Option = Object.freeze({
         const data = await Storage.getAsync();
         return data.host;
     },
-    addHostAsync: async function (host) {
-        const hosts = await this.getHostsAsync();
+    haveHost: async function (host) {
         let haveHost = false;
+        const hosts = await this.getHostsAsync();
+        hosts.forEach((savedHost) => {
+            if (savedHost == host)
+                haveHost = true;
+        });
+        return haveHost;
+    },
+    addHostAsync: async function (host) {
+        let haveHost = false;
+        const hosts = await this.getHostsAsync();
         hosts.forEach((savedHost) => {
             if (savedHost == host)
                 haveHost = true;
@@ -20,10 +29,16 @@ const Option = Object.freeze({
     },
     removeHostAsync: async function (host) {
         const hosts = await this.getHostsAsync();
-        hosts.forEach((savedHost) => {
+        let hostIndex = -1;
+        hosts.forEach((savedHost, index) => {
             if (savedHost == host) {
+                hostIndex = index;
             }
         });
+        if (hostIndex > -1) {
+            hosts.splice(hostIndex, 1);
+            await Storage.setHostsAsync(hosts);
+        }
     },
     clearAllHostsAync: async function () {
         await Storage.setHostsAsync([]);

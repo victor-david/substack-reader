@@ -6,6 +6,17 @@ const Tab = Object.freeze({
         const [tab] = await chrome.tabs.query(options);
         return tab;
     },
+    getTabUrl: function (tab) {
+        if (tab) {
+            if (tab.url?.length) {
+                return tab.url;
+            }
+            if (tab.pendingUrl?.length) {
+                return tab.pendingUrl;
+            }
+        }
+        return "";
+    },
     reloadTabsAsync: async function () {
         const urls = [Util.getHostQueryMask()];
         const sites = await Option.getHostsAsync();

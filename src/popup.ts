@@ -1,5 +1,6 @@
 import {Values} from "./storage.js"
 import Updater from "./update.js"
+import Option from "./option.js";
 import Util from "./util.js";
 import Tab from "./tab.js";
 
@@ -18,6 +19,32 @@ document.getElementById("btn-off")?.addEventListener("click", async () =>
     await Updater.updateIfAsync(Values.TextZero, Values.CssZero);
 });
 
+document.getElementById("btn-add-host")?.addEventListener("click", async () =>
+{
+    const tab = await Tab.getCurrentTabAsync();
+    const tabUrl = Tab.getTabUrl(tab);
+    if (tabUrl)
+    {
+        await Option.addHostAsync(Util.getHostName(tabUrl));
+        hide("section-user-add");
+        show("div-theme-buttons");
+        show("section-user-enabled");
+    }
+});
+
+document.getElementById("btn-remove-host")?.addEventListener("click", async () =>
+{
+    const tab = await Tab.getCurrentTabAsync();
+    const tabUrl = Tab.getTabUrl(tab);
+    if (tabUrl)
+    {
+        await Option.removeHostAsync(Util.getHostName(tabUrl));
+        show("section-user-add");
+        hide("div-theme-buttons");
+        hide("section-user-enabled");
+    }
+});
+
 document.getElementById("img-option")?.addEventListener("click", async () =>
 {
     await chrome.runtime.openOptionsPage();
@@ -26,31 +53,40 @@ document.getElementById("img-option")?.addEventListener("click", async () =>
 window.addEventListener("load", async () =>
 {
     const tab = await Tab.getCurrentTabAsync();
-    evaluateTab(tab);
+    evaluateTab(Tab.getTabUrl(tab));
 });
 
-const evaluateTab = async function(tab: chrome.tabs.Tab): Promise<void>
+const evaluateTab = async function(tabUrl: string): Promise<void>
 {
     // All pieces are hidden by default (except the icon and title)
     // Depending on the url, show a piece
-    if (tab?.url?.length)
+    if (tabUrl)
     {
-        if (Util.isSchema(tab.url))
+        if (Util.isSchema(tabUrl))
         {
-            if (Util.isSubstack(tab.url))
+            if (Util.isSubstack(tabUrl))
             {
                 show("div-theme-buttons");
                 show("div-substack");
             }
             else
             {
-                const host = Util.getHostName(tab.url);
-
+                const host = Util.getHostName(tabUrl);
+                const haveHost = await Option.haveHost(host);
+                if (haveHost)
+                {
+                    show("div-theme-buttons");
+                    show("section-user-enabled");
+                }
+                else
+                {
+                    show("section-user-add");
+                }
             }
         }
         else
         {
-            if (Util.isExtensionPage(tab.url))
+            if (Util.isExtensionPage(tabUrl))
             {
                 await Util.displayHosts();
                 show("div-extension");
@@ -66,4 +102,9 @@ const evaluateTab = async function(tab: chrome.tabs.Tab): Promise<void>
 const show = function(elementId: string)
 {
     document.getElementById(elementId)?.classList.remove("d-none");
+}
+
+const hide = function(elementId: string)
+{
+    document.getElementById(elementId)?.classList.add("d-none");
 }
