@@ -50,6 +50,11 @@ document.getElementById("img-option")?.addEventListener("click", async () =>
     await chrome.runtime.openOptionsPage();
 });
 
+document.getElementById("img-help")?.addEventListener("click", async () =>
+{
+    await Util.openHelpPage();
+});
+
 window.addEventListener("load", async () =>
 {
     const tab = await Tab.getCurrentTabAsync();

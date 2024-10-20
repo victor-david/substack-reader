@@ -80,7 +80,7 @@ const Util = Object.freeze(
      *
      * @param nodeId The node id in which to place the list of sites (default div-sites)
      */
-    displayHosts: async function(nodeId?:string)
+    displayHosts: async function(nodeId?:string): Promise<void>
     {
         if (!nodeId) nodeId = "div-sites";
         const ul = document.createElement("ul");
@@ -99,6 +99,26 @@ const Util = Object.freeze(
         {
             while (node.hasChildNodes()) { node.removeChild(node.firstChild as Node);}
             document.getElementById(nodeId)?.appendChild(ul);
+        }
+    },
+
+    /**
+     * Opens the extension's help page.
+     *
+     * If the help page isn't open, creates a new tab.
+     * If the help page is open, switches to that tab
+     */
+    openHelpPage: async function(): Promise<void>
+    {
+        const url = chrome.runtime.getURL("page/help.html");
+        const tabs = await chrome.tabs.query({url: [url]});
+        if (tabs.length)
+        {
+            chrome.tabs.update(tabs[0].id as number, {active: true});
+        }
+        else
+        {
+            await chrome.tabs.create({ url: url });
         }
     }
 });

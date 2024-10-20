@@ -39,6 +39,16 @@ const Util = Object.freeze({
             }
             document.getElementById(nodeId)?.appendChild(ul);
         }
+    },
+    openHelpPage: async function () {
+        const url = chrome.runtime.getURL("page/help.html");
+        const tabs = await chrome.tabs.query({ url: [url] });
+        if (tabs.length) {
+            chrome.tabs.update(tabs[0].id, { active: true });
+        }
+        else {
+            await chrome.tabs.create({ url: url });
+        }
     }
 });
 export default Util;

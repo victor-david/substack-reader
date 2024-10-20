@@ -6,4 +6,4 @@ button.btn-full {display: block; margin: 0; width: 100%}
 
 .d-block {display: block}
 .d-none {display: none}
-#img-option {cursor: hand}
+#img-help,#img-option {cursor: hand}

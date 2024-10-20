@@ -35,15 +35,15 @@ button {
 
 .header {
     border-bottom: 1px solid #ddd;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    gap: 2px;
+    grid-template-columns: 36px auto 20px 20px;
     margin-bottom: 8px;
     padding-bottom: 6px;
 }
-
-.header h2 {
-    color:#cd0000;
-    font-size: 148%
+.header b {
+    color:#0000ad;
+    font-size: 125%;
 }
 
 section.content div {
